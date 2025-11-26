@@ -1,0 +1,25 @@
+{
+  "name": "nav",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.mjs",
+    "dev": "cross-env NODE_ENV=development webpack --config webpack.config.mjs --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "html-loader": "^5.1.0",
+    "raw-loader": "^4.0.2",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-shell-plugin-next": "^2.3.2"
+  },
+  "dependencies": {
+    "mammoth": "^1.11.0"
+  }
+}
