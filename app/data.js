@@ -44,7 +44,7 @@ export const data = [
     periods: [{ start: "3 сентября", end: "2 октября" }],
   },
   {
-    name: "АПХ",
+    name: "ЛПХ",
     periods: [
       { start: "1 апреля", end: "11 апреля" },
       { start: "1 июля", end: "11 июля" },
