@@ -1,0 +1,365 @@
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background-color: #ffffff;
+  padding: 15px;
+  position: relative !important;
+  z-index: 0;
+} /* Стиль таблицы */
+.table-container table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 800px;
+} /* Стили заголовков таблицы */
+.table-container th {
+  background-color: #4a90e2;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 14px 20px;
+  text-align: left;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.table-container th:first-child {
+  border-top-left-radius: 8px;
+}
+.table-container th:last-child {
+  border-top-right-radius: 8px;
+} /* Стили ячеек данных */
+.table-container td {
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+  line-height: 1.5;
+  font-size: 14px;
+} /* Стиль для четных строк */
+.table-container tr:nth-child(even) {
+  background-color: #f9f9f9;
+} /* Стиль при наведении */
+.table-container tr:hover {
+  background-color: #e6f0ff;
+  transition: background-color 0.2s ease;
+} /* Стили для примечаний */
+.note {
+  font-size: 0.8rem;
+  color: #636363;
+  padding: 10px 0 0 20px;
+} /* Адаптивность для текста */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  .table-container {
+    padding: 5px;
+  }
+  .table-container th,
+  .table-container td {
+    padding: 10px 15px;
+  }
+} /* ------------------------------------------------------------------- */ /* НОВЫЕ СТИЛИ ДЛЯ ВИЗУАЛИЗАЦИИ ВРЕМЕННОЙ ШКАЛЫ (36-КОЛОНОЧНАЯ СЕТКА) */ /* ------------------------------------------------------------------- */ /* Определяем ширину одной колонки (100% / 36) для точных расчетов */
+:root {
+  --columns-per-month: 6;
+  --months: 6;
+  --days-in-month: 30;
+  --col-width: 100% / (var(--months) * var(--columns-per-month));
+}
+
+/* Timeline grid container */
+.timeline-grid-wrapper {
+  position: relative;
+  height: 30rem;
+  margin-bottom: 1rem;
+}
+.timeline-grid {
+  position: relative;
+  height: 30rem;
+  margin-bottom: 15px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(var(--months), 1fr);
+  background: linear-gradient(to right, #979797 0 2px, transparent 0px) repeat-x;
+  background-size: calc(100% / var(--months)) 100%;
+  z-index: 23;
+}
+.timeline-grid-small-lines {
+  margin-left: 1.5px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  grid-template-columns: repeat(30, 1fr);
+  background: linear-gradient(to right, #e4e4e4 0 2px, transparent 0px) repeat-x;
+  background-size: calc(100% / 30) 100%;
+
+  z-index: 0;
+}
+
+/* CSS */
+.timeline-link {
+  position: absolute; /* positions the whole bar + text on timeline */
+  display: block;
+  text-decoration: none;
+  z-index: 5;
+}
+
+.timeline-link .survey-bar {
+  position: relative; /* relative to link wrapper */
+  height: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-link .survey-text {
+  position: relative; /* relative to link wrapper */
+  top: 0.5rem; /* adjust distance below the bar */
+  font-size: 0.8rem;
+  color: #333;
+  white-space: nowrap;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.3rem;
+  width: fit-content !important;
+  background-color: white !important;
+}
+
+/* Main month separators (thicker lines) */
+/* .timeline-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent calc(100% / var(--months) - 2px),
+    #bbb calc(100% / var(--months) - 2px),
+    #bbb calc(100% / var(--months))
+  );
+  z-index: 0;
+} */
+
+.timeline-title {
+  text-align: left;
+  color: #4a90e2;
+  margin-bottom: 1.5625rem;
+  margin-top: 3rem;
+  font-weight: 300;
+  font-size: 1.3rem;
+}
+
+/* Sub-columns inside each month (lighter lines) */
+/* .timeline-grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    transparent,
+    transparent calc((100% / var(--months)) / var(--columns-per-month) - 1px),
+    #f0f0f0 calc((100% / var(--months)) / var(--columns-per-month) - 1px),
+    #f0f0f0 calc((100% / var(--months)) / var(--columns-per-month))
+  );
+  z-index: 1;
+} */
+
+/* Optional: shaded background for each month */
+.timeline-month-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(100% / var(--months));
+  z-index: 0;
+}
+
+/* Alternate shading for clarity */
+.timeline-month-bg:nth-child(odd) {
+  background-color: rgba(200, 247, 255, 0.1);
+}
+.timeline-month-bg:nth-child(even) {
+  background-color: rgba(232, 255, 200, 0.08);
+}
+
+/* Survey bars on top */
+.survey-bar {
+  position: absolute;
+  height: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+.survey-bar:hover {
+  z-index: 20;
+  transform: scaleX(1.005) translateY(-1px);
+}
+
+.month-labels {
+  margin: 0 4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  border-bottom: 1px solid rgb(175, 175, 175);
+  /* justify-items: ; */
+}
+
+/* Уровни для вертикального размещения */
+.level-1 {
+  top: 2rem;
+}
+.level-2 {
+  top: 3.875rem;
+}
+.level-3 {
+  top: 5.75rem;
+}
+.level-4 {
+  top: 7.625rem;
+}
+.level-5 {
+  top: 9.5rem;
+}
+.level-6 {
+  top: 11.375rem;
+}
+.level-7 {
+  top: 13.25rem;
+}
+.level-8 {
+  top: 16.25rem;
+}
+
+.color-1 {
+  background-color: #9bf6ff;
+} /* Доходы */
+.color-2 {
+  background-color: #caffbf;
+} /* Доходы / Многодетные */
+.color-3 {
+  background-color: #ffe2b6;
+} /* Комплексное наблюдение */
+.color-4 {
+  background-color: #ffd6a5;
+} /* Здоровье */
+.color-5 {
+  background-color: #ffadad;
+}
+.color-6 {
+  background-color: #72ddf7;
+} /* ИТ */
+.color-7 {
+  background-color: #c2a9ef;
+}
+.color-8 {
+  background-color: #efa9cc;
+}
+.color_select-1 {
+  background-color: #c8f7ff; /* Доходы */
+}
+.color_select-2 {
+  background-color: #e5ffc7; /* Доходы / Многодетные */
+}
+.color_select-3 {
+  background-color: #ffffd4; /* Комплексное наблюдение */
+}
+.color_select-4 {
+  background-color: #ffeacc; /* Здоровье */
+}
+.color_select-5 {
+  background-color: #ffcfd4; /* Финансы / общие */
+}
+.color_select-6 {
+  background-color: #b3eefb; /* ИТ */
+}
+.color_select-7 {
+  background-color: #e6d4f8; /* Разное */
+}
+.color_select-8 {
+  background-color: #f7b5d6; /* Разное */
+}
+
+.months {
+  padding: 2rem !important;
+}
+.cityHider {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #caffbf;
+  border-radius: 0.35rem;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 1rem;
+  font-family: sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.cityHider:focus {
+  outline: none; /* remove default outline */
+  border-color: #c8f7ff; /* subtle border change */
+  box-shadow: 0 0 0.5rem 0.2rem #c8f7ff; /* pastel glow */
+}
+button.timeline-btn {
+  border: 0.1rem solid rgb(152, 96, 255);
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  /* border: none; */
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #c8f7ff; /* pastel blue */
+  color: #333;
+  outline: none;
+}
+
+button.timeline-btn:hover {
+  background-color: #a0e8ff; /* slightly darker on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+button.timeline-btn:active {
+  background-color: #8ddfff; /* pressed color */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+}
+
+/* optional: different color for prev vs next */
+button#prevBtn {
+  background-color: #ffd6a5; /* pastel orange */
+}
+
+button#prevBtn:hover {
+  background-color: #ffbf80;
+}
+
+button#nextBtn {
+  background-color: #c8f7ff; /* pastel blue */
+}
+
+button#nextBtn:hover {
+  background-color: #a0e8ff;
+}
+
+button.timeline-btn:hover {
+  border: 0.1rem solid rgb(152, 96, 255);
+  box-shadow: 0 0 0.5rem 0.2rem rgb(165, 117, 255); /* pastel glow */
+}

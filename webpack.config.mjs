@@ -1,3 +1,4 @@
+// webpack.config.mjs
 import { CMS_BLOCK_ID } from "./app/utils/key.js";
 import path from "path";
 import fs from "fs";
@@ -39,24 +40,17 @@ export default {
   module: {
     rules: [
       {
-        test: /\.html$/i,
-        loader: "html-loader",
-        options: {
-          minimize: false,
-        },
-      },
-      {
         test: /\.css$/i,
         type: "asset/source", // import CSS as string
       },
-      // {
-      //   test: /\.html$/i, // <-- НОВОЕ ПРАВИЛО: Обрабатываем HTML как строку
-      //   type: "asset/source",
-      // },
       {
         test: /\.mjs$/,
         include: /node_modules/,
         type: "javascript/auto",
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
       },
     ],
   },
