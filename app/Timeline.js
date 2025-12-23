@@ -140,7 +140,7 @@ export const Timeline = {
         link.classList.add("timeline-link");
         link.style.left = pos.left;
         link.style.width = pos.width;
-        link.style.top = `calc(${itemIndex + 1} * 3rem)`;
+        link.style.top = `calc(${itemIndex + 1} * 5rem)`;
 
         if (hiddenIds.includes(linkId)) {
           link.classList.add("hidden");
@@ -148,7 +148,7 @@ export const Timeline = {
 
         // Create colored bar (use your color-* CSS class)
         const bar = document.createElement("div");
-        bar.classList.add("survey-bar", `color-${(itemIndex % 7) + 1}`);
+        bar.classList.add("survey-bar", `color-${(itemIndex + 1)}`);
         bar.dataset.name = item.name;
 
         // Create text div (kept intact)

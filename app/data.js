@@ -1,7 +1,12 @@
 export const data = [
   {
     name: "ОБДХ",
-    periods: [{ start: "—", end: "—" }], // placeholder for ongoing/quarterly survey
+    periods: [
+      { start: "1 февраля", end: "28 февраля" },
+      { start: "1 мая", end: "31 мая" },
+      { start: "1 августа", end: "31 августа" },
+      { start: "1 ноября", end: "30 ноября" },
+    ],
   },
   {
     name: "ВНДН",
@@ -51,6 +56,15 @@ export const data = [
       { start: "1 октября", end: "11 октября" },
       { start: "1 ноября", end: "11 ноября" },
       { start: "1 декабря", end: "11 декабря" },
+    ],
+  },
+  {
+    name: "РР",
+    periods: [
+      { start: "1 января", end: "31 января" },
+      { start: "1 апреля", end: "30 апреля" },
+      { start: "1 июля", end: "31 июля" },
+      { start: "1 октября", end: "31 октября" },
     ],
   },
 ];
